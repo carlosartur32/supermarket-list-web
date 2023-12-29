@@ -6,6 +6,7 @@
 @font-face {
   font-family: "Avenir Next";
   src: url("/public/fonts/AvenirNext-Bold.otf");
+  font-weight: bold;
 }
 
 @font-face {
@@ -44,4 +45,9 @@ h3 {
   font-weight: 500;
   margin: 0px;
   padding: 0px;
+}
+
+::-webkit-scrollbar {
+  visibility: hidden;
+  width: 0px;
 }
