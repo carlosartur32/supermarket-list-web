@@ -36,6 +36,18 @@ export const ListScreen = () => {
     setModalVisible(true);
   };
 
+  const onCheckItem = async (item) => {
+    const result = await updateItem(item._id, {
+      name: item.name,
+      quantity: Number(item.quantity),
+      checked: !item.checked,
+    });
+
+    if (!result.error) {
+      await loadListItens();
+    }
+  };
+
   return (
     <div className="list-screen-container">
       <div className="list-screen-content-container">
@@ -49,14 +61,20 @@ export const ListScreen = () => {
             <h1 className="list-screen-header-title">Lista Supermercado</h1>
           </div>
           <div className="list-screen-header-button-container">
-            <Button onClick={onClickAddButton}>Adicionar</Button>
+            <Button onClick={onClickAddButton}>
+              {window.innerWidth <= 420 ? "+" : "Adicionar"}
+            </Button>
           </div>
         </div>
         <div className="list-screen-list-container">
           {loading ? (
             <Loader />
           ) : (
-            <ListRender onEdit={onEditItem} list={listData} />
+            <ListRender
+              onCheckItem={onCheckItem}
+              onEdit={onEditItem}
+              list={listData}
+            />
           )}
         </div>
       </div>
